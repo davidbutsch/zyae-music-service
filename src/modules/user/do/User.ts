@@ -13,42 +13,30 @@ import { IsISO6391, IsObjectId } from "@/common";
 import { Type } from "class-transformer";
 
 export class UserProfile {
-  @IsString()
-  firstName: string;
-
-  @IsString()
-  lastName: string;
-
-  @IsEmail()
-  email: string;
-
-  @IsUrl()
-  thumbnail: string;
+  @IsString() firstName: string;
+  @IsString() lastName: string;
+  @IsEmail() email: string;
+  @IsUrl() thumbnail: string;
 }
 
 export class UserPreferences {
-  @IsISO6391()
-  language: string;
+  @IsISO6391() language: string;
 }
 
 export class UserSecurity {
-  @IsString()
-  password: string;
+  @IsString() password: string;
 }
 
 export class UserFlags {
-  @IsBoolean()
-  isEmailVerified: boolean;
+  @IsBoolean() isEmailVerified: boolean;
 }
 
 export class UserMetadata {
-  @IsDate()
-  createdAt: Date;
+  @IsDate() createdAt: Date;
 }
 
-export default class {
-  @IsObjectId()
-  _id: string;
+export class User {
+  @IsObjectId() _id: string;
 
   @IsDefined()
   @IsNotEmptyObject()
