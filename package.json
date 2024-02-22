@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --require ts-node/register --watch src ./src/index.ts",
     "prod": "cross-env NODE_ENV=production ts-node ./src/index.ts",
-    "start": "node --require ./dist/index.js",
+    "start": "node ./dist/index.js",
     "build": "tsc --build",
     "clean:build": "rimraf build",
     "clean:buildinfo": "rimraf ./tsconfig.tsbuildinfo",
@@ -48,6 +48,6 @@
     "typescript": "^5.3.3"
   },
   "_moduleAliases": {
-    "@": "./src/"
+    "@": "./dist"
   }
 }
