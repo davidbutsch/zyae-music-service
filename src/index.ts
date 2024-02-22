@@ -7,11 +7,11 @@ import "./handleExit";
 
 import * as libs from "@/libs";
 
-import { QueueUtils } from "./queue";
 import { env } from "@/common";
+import { initializeWorkers } from "./queue";
 
 libs.Logger.info(
   `microservice-template with process id of ${process.pid} starting in ${env.NODE_ENV} mode`
 );
 
-QueueUtils.initializeWorkers();
+initializeWorkers();
