@@ -1,34 +1,13 @@
 import {
-  IsBoolean,
-  IsDefined,
-  IsEmail,
-  IsNotEmptyObject,
-  IsString,
-  IsUrl,
-  ValidateNested,
-} from "class-validator";
-import { IsISO6391, IsObjectId } from "@/common";
+  AccountFlags,
+  AccountPreferences,
+  AccountProfile,
+  AccountSecurity,
+} from ".";
+import { IsDefined, IsNotEmptyObject, ValidateNested } from "class-validator";
 
+import { IsObjectId } from "@/common";
 import { Type } from "class-transformer";
-
-export class AccountProfile {
-  @IsString() firstName: string;
-  @IsString() lastName: string;
-  @IsEmail() email: string;
-  @IsUrl() thumbnail: string;
-}
-
-export class AccountPreferences {
-  @IsISO6391() language: string;
-}
-
-export class AccountSecurity {
-  @IsString() password: string;
-}
-
-export class AccountFlags {
-  @IsBoolean() isEmailVerified: boolean;
-}
 
 export class Account {
   @IsObjectId() _id: string;

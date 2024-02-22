@@ -1,39 +1,12 @@
-import {
-  IsBoolean,
-  IsDate,
-  IsDefined,
-  IsEmail,
-  IsNotEmptyObject,
-  IsString,
-  IsUrl,
-  ValidateNested,
-} from "class-validator";
-import { IsISO6391, IsObjectId } from "@/common";
+import { IsDefined, IsNotEmptyObject, ValidateNested } from "class-validator";
 
+import { IsObjectId } from "@/common";
 import { Type } from "class-transformer";
-
-export class UserProfile {
-  @IsString() firstName: string;
-  @IsString() lastName: string;
-  @IsEmail() email: string;
-  @IsUrl() thumbnail: string;
-}
-
-export class UserPreferences {
-  @IsISO6391() language: string;
-}
-
-export class UserSecurity {
-  @IsString() password: string;
-}
-
-export class UserFlags {
-  @IsBoolean() isEmailVerified: boolean;
-}
-
-export class UserMetadata {
-  @IsDate() createdAt: Date;
-}
+import { UserFlags } from "./UserFlags";
+import { UserMetadata } from "./UserMetadata";
+import { UserPreferences } from "./UserPreferences";
+import { UserProfile } from "./UserProfile";
+import { UserSecurity } from "./UserSecurity";
 
 export class User {
   @IsObjectId() _id: string;
