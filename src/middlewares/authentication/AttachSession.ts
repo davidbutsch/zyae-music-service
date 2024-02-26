@@ -14,22 +14,18 @@ export class AttachSession implements ExpressMiddlewareInterface {
   ) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
-    try {
-      const accessToken = req.cookies.at;
-      const session = await this.sessionService.findByAccessToken(accessToken);
+    const accessToken = req.cookies.at;
+    const session = await this.sessionService.findByAccessToken(accessToken);
 
-      if (!session)
-        throw new AppError(StatusCodes.UNAUTHORIZED, "Session not found");
+    if (!session)
+      throw new AppError(StatusCodes.UNAUTHORIZED, "Session not found");
 
-      const isExpired = this.sessionService.isSessionExpired(session);
-      if (isExpired)
-        throw new AppError(StatusCodes.UNAUTHORIZED, "Session access expired");
+    const isExpired = this.sessionService.isSessionExpired(session);
+    if (isExpired)
+      throw new AppError(StatusCodes.UNAUTHORIZED, "Session access expired");
 
-      res.locals.session = session;
+    res.locals.session = session;
 
-      next();
-    } catch (error) {
-      if (error instanceof AppError) return next(error);
-    }
+    next();
   }
 }
