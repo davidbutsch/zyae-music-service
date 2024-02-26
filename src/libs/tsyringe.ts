@@ -5,8 +5,14 @@ import {
 } from "@/modules/account";
 import { ClassConstructor, IocAdapter } from "routing-controllers";
 import { DependencyContainer, container } from "tsyringe";
+import {
+  ISessionService,
+  SessionRepository,
+  SessionService,
+} from "@/modules/session";
 
 import { IAccountService } from "@/modules/account";
+import { ISessionRepository } from "@/modules/session/repositories/ISessionRepository";
 import { useContainer } from "routing-controllers";
 
 class TsyringeAdapter implements IocAdapter {
@@ -23,6 +29,12 @@ container.register<IAccountService>("AccountService", {
 });
 container.register<IAccountRepository>("AccountRepository", {
   useClass: AccountRepository,
+});
+container.register<ISessionService>("SessionService", {
+  useClass: SessionService,
+});
+container.register<ISessionRepository>("SessionRepository", {
+  useClass: SessionRepository,
 });
 
 useContainer(new TsyringeAdapter(container));

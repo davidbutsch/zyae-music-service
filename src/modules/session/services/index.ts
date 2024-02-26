@@ -1,2 +1,2 @@
-export * from "./getSession";
-export * from "./isSessionExpired";
+export * from "./ISessionService";
+export * from "./SessionService";
