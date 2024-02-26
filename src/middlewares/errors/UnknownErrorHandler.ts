@@ -6,6 +6,7 @@ import { Request, Response } from "express";
 
 import { ErrorResponse } from "@/errors";
 import { env } from "@/common";
+import { serializeError } from "serialize-error-cjs";
 
 @Middleware({ type: "after" })
 export class UnknownErrorHandler implements ExpressErrorMiddlewareInterface {
@@ -17,7 +18,8 @@ export class UnknownErrorHandler implements ExpressErrorMiddlewareInterface {
     };
 
     if (typeof errorResponse.code !== "number") errorResponse.code = 500;
-    if (env.NODE_ENV === "development") errorResponse.errors = [error];
+    if (env.NODE_ENV === "development")
+      errorResponse.errors = [serializeError(error)];
 
     res.status(errorResponse.code).json({ error: errorResponse });
   }
