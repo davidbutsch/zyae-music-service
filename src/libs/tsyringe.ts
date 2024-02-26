@@ -1,7 +1,11 @@
+import {
+  AccountRepository,
+  AccountService,
+  IAccountRepository,
+} from "@/modules/account";
 import { ClassConstructor, IocAdapter } from "routing-controllers";
 import { DependencyContainer, container } from "tsyringe";
 
-import { AccountService } from "@/modules/account";
 import { IAccountService } from "@/modules/account";
 import { useContainer } from "routing-controllers";
 
@@ -16,6 +20,9 @@ class TsyringeAdapter implements IocAdapter {
 
 container.register<IAccountService>("AccountService", {
   useClass: AccountService,
+});
+container.register<IAccountRepository>("AccountRepository", {
+  useClass: AccountRepository,
 });
 
 useContainer(new TsyringeAdapter(container));

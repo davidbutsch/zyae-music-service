@@ -1,13 +1,17 @@
-import { Account, AccountDTO } from "@/modules/account";
+import { Account, AccountDTO, IAccountRepository } from "@/modules/account";
 
 import { IAccountService } from "./IAccountService";
 import { Types } from "mongoose";
-import { injectable } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
 @injectable()
 export class AccountService implements IAccountService {
+  constructor(
+    @inject("AccountRepository") private accountRepository: IAccountRepository
+  ) {}
+
   async findById(id: string): Promise<AccountDTO | null> {
-    return null;
+    return this.accountRepository.findById(id);
   }
   create(account: Partial<Account>): Promise<AccountDTO> {
     throw new Error("Method not implemented.");
