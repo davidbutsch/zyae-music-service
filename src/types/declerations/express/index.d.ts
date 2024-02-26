@@ -1,9 +1,9 @@
-import { SessionEntity } from "@shared/resources/Session";
+import { Session } from "@/modules/session";
 
 declare global {
   namespace Express {
     interface Locals {
-      session: SessionEntity;
+      session: Session;
     }
   }
 }
