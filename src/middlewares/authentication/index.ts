@@ -1,2 +1,1 @@
-export * from "./attachSession";
-export * from "./checkAuthentication";
+export * from "./AttachSession";
