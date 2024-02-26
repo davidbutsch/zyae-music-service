@@ -18,7 +18,7 @@ const getTargetType = (message: string) => {
 @Middleware({ type: "after" })
 export class ValidationErrorHandler implements ExpressErrorMiddlewareInterface {
   error(error: any, _req: Request, res: Response, next: NextFunction): void {
-    if (!(error?.errors[0] instanceof ValidationError)) return next(error);
+    if (!(error?.errors?.[0] instanceof ValidationError)) return next(error);
 
     const validationErrors = error.errors;
     const targetType = getTargetType(error.message);
