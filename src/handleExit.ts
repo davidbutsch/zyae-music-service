@@ -30,7 +30,7 @@ const gracefulShutdown = async () => {
 
 const exitSignals = ["SIGHUP", "SIGINT", "SIGTERM"];
 
-Object.keys(exitSignals).forEach((signal) => {
+exitSignals.forEach((signal) => {
   process.on(signal, () => {
     Logger.info(`Received a ${signal} signal`);
     gracefulShutdown();
