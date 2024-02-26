@@ -1,7 +1,9 @@
 process.title = "microservice-template";
 Error.stackTraceLimit = process.env.NODE_ENV === "production" ? -1 : 10;
 
-import "module-alias/register";
+import { addAlias } from "module-alias";
+addAlias("@", `${__dirname}/`);
+
 import "reflect-metadata";
 import "./handleExit";
 
