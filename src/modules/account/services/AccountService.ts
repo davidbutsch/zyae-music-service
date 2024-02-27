@@ -1,6 +1,10 @@
-import { Account, AccountDTO, IAccountRepository } from "@/modules/account";
+import {
+  Account,
+  AccountDTO,
+  IAccountRepository,
+  IAccountService,
+} from "@/modules/account";
 
-import { IAccountService } from "./IAccountService";
 import { Types } from "mongoose";
 import { inject, injectable } from "tsyringe";
 

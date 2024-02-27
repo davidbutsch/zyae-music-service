@@ -1,7 +1,5 @@
+import { Account, IAccountRepository } from "@/modules/account";
 import { Document, QueryOptions, Types, UpdateQuery } from "mongoose";
-
-import { Account } from "@/modules/account";
-import { IAccountRepository } from "./IAccountRepository";
 
 export class AccountRepository implements IAccountRepository {
   findById(

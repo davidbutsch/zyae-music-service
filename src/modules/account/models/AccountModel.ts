@@ -1,8 +1,7 @@
 import { Model, Schema, model } from "mongoose";
+import { mongoRequired, validateISO6381 } from "@/common";
 
 import { Account } from "@/modules/account";
-import { mongoRequired } from "@/common";
-import { validateISO6381 } from "@/common";
 
 type AccountModelType = Model<Account>;
 

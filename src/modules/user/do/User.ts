@@ -1,12 +1,14 @@
 import { IsDefined, IsNotEmptyObject, ValidateNested } from "class-validator";
+import {
+  UserFlags,
+  UserMetadata,
+  UserPreferences,
+  UserProfile,
+  UserSecurity,
+} from ".";
 
 import { IsObjectId } from "@/common";
 import { Type } from "class-transformer";
-import { UserFlags } from "./UserFlags";
-import { UserMetadata } from "./UserMetadata";
-import { UserPreferences } from "./UserPreferences";
-import { UserProfile } from "./UserProfile";
-import { UserSecurity } from "./UserSecurity";
 
 export class User {
   @IsObjectId() _id: string;

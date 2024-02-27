@@ -1,5 +1,5 @@
 import { Logger } from "@/libs";
-import { ServiceWorkers } from "../ServiceWorkers";
+import { ServiceWorkers } from "@/queue";
 
 export const initializeWorkers = async () => {
   Logger.info("Initializing workers");

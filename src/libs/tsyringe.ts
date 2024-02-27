@@ -2,18 +2,20 @@ import {
   AccountRepository,
   AccountService,
   IAccountRepository,
+  IAccountService,
 } from "@/modules/account";
-import { ClassConstructor, IocAdapter } from "routing-controllers";
+import {
+  ClassConstructor,
+  IocAdapter,
+  useContainer,
+} from "routing-controllers";
 import { DependencyContainer, container } from "tsyringe";
 import {
+  ISessionRepository,
   ISessionService,
   SessionRepository,
   SessionService,
 } from "@/modules/session";
-
-import { IAccountService } from "@/modules/account";
-import { ISessionRepository } from "@/modules/session/repositories/ISessionRepository";
-import { useContainer } from "routing-controllers";
 
 class TsyringeAdapter implements IocAdapter {
   constructor(private readonly TsyringeContainer: DependencyContainer) {}

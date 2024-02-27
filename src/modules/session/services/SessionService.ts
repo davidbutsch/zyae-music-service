@@ -1,7 +1,6 @@
-import { ISessionService } from "./ISessionService";
 import { Session } from "..";
 import { inject, injectable } from "tsyringe";
-import { ISessionRepository } from "../repositories/ISessionRepository";
+import { ISessionRepository, ISessionService } from "@/modules/session";
 
 @injectable()
 export class SessionService implements ISessionService {

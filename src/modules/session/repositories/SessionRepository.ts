@@ -1,5 +1,5 @@
-import { ISessionRepository } from "./ISessionRepository";
-import { Session } from "..";
+import { ISessionRepository, Session } from "@/modules/session";
+
 import { redis } from "@/libs";
 
 export class SessionRepository implements ISessionRepository {
