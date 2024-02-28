@@ -1,5 +1,6 @@
 import {
   AccountFlags,
+  AccountMetadata,
   AccountPreferences,
   AccountProfile,
   AccountSecurity,
@@ -35,4 +36,10 @@ export class Account {
   @ValidateNested()
   @Type(() => AccountFlags)
   flags: AccountFlags;
+
+  @IsDefined()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => AccountMetadata)
+  metadata: AccountMetadata;
 }

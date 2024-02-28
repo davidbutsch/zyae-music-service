@@ -1,6 +1,7 @@
 import {
   Account,
   AccountFlags,
+  AccountMetadata,
   AccountModel,
   AccountPreferences,
   AccountProfile,
@@ -34,6 +35,12 @@ export class AccountDTO implements Omit<Account, "security"> {
   @ValidateNested()
   @Type(() => AccountFlags)
   flags: AccountFlags;
+
+  @IsDefined()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => AccountMetadata)
+  metadata: AccountMetadata;
 
   static toDTO(domain: Account): AccountDTO {
     if (domain instanceof AccountModel) domain = domain.toObject();

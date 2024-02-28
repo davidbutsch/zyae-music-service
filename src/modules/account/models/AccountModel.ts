@@ -43,11 +43,23 @@ const flagsSchema = new Schema<Account["flags"]>(
   { _id: false }
 );
 
+const metadataSchema = new Schema<Account["metadata"]>(
+  {
+    createdAt: {
+      type: String,
+      required: true,
+      default: () => new Date().toISOString(),
+    },
+  },
+  { _id: false }
+);
+
 export const accountSchema = new Schema<Account, AccountModelType>({
   profile: mongoRequired(accountProfileSchema),
   security: mongoRequired(securitySchema),
   preferences: mongoRequired(preferencesSchema),
   flags: mongoRequired(flagsSchema),
+  metadata: mongoRequired(metadataSchema),
 });
 
 export const AccountModel = model<Account, AccountModelType>(
