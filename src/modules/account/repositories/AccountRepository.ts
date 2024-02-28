@@ -5,10 +5,10 @@ export class AccountRepository implements IAccountRepository {
   findById(
     id: string | Types.ObjectId | undefined,
     options?: QueryOptions
-  ): Promise<Account | null> {
+  ): Promise<(Account & Document) | null> {
     throw new Error("Method not implemented.");
   }
-  create(account: Partial<Account>): Promise<Account> {
+  create(account: Partial<Account>): Promise<Account & Document> {
     throw new Error("Method not implemented.");
   }
   update(
