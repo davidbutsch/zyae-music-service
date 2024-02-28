@@ -27,6 +27,7 @@ const preferencesSchema = new Schema<Account["preferences"]>(
     language: {
       type: String,
       required: true,
+      default: "en",
       validate: {
         validator: validateISO6381,
       },
@@ -37,7 +38,7 @@ const preferencesSchema = new Schema<Account["preferences"]>(
 
 const flagsSchema = new Schema<Account["flags"]>(
   {
-    isEmailVerified: mongoRequired(Boolean),
+    isEmailVerified: { type: Boolean, required: true, default: false },
   },
   { _id: false }
 );
