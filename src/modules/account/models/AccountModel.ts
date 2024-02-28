@@ -44,10 +44,10 @@ const flagsSchema = new Schema<Account["flags"]>(
 );
 
 export const accountSchema = new Schema<Account, AccountModelType>({
-  profile: accountProfileSchema,
-  security: securitySchema,
-  preferences: preferencesSchema,
-  flags: flagsSchema,
+  profile: mongoRequired(accountProfileSchema),
+  security: mongoRequired(securitySchema),
+  preferences: mongoRequired(preferencesSchema),
+  flags: mongoRequired(flagsSchema),
 });
 
 export const AccountModel = model<Account, AccountModelType>(
