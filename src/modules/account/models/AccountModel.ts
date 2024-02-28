@@ -15,6 +15,13 @@ const accountProfileSchema = new Schema<Account["profile"]>(
   { _id: false }
 );
 
+const securitySchema = new Schema<Account["security"]>(
+  {
+    password: { type: String, default: null },
+  },
+  { _id: false }
+);
+
 const preferencesSchema = new Schema<Account["preferences"]>(
   {
     language: {
@@ -37,6 +44,7 @@ const flagsSchema = new Schema<Account["flags"]>(
 
 export const accountSchema = new Schema<Account, AccountModelType>({
   profile: accountProfileSchema,
+  security: securitySchema,
   preferences: preferencesSchema,
   flags: flagsSchema,
 });
