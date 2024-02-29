@@ -1,16 +1,16 @@
 import { Model, Schema, model } from "mongoose";
-import { mongoRequired, validateISO6381 } from "@/common";
 
 import { Account } from "@/modules/account";
+import { validateISO6381 } from "@/common";
 
 type AccountModelType = Model<Account>;
 
 const accountProfileSchema = new Schema<Account["profile"]>(
   {
-    firstName: mongoRequired(String),
-    lastName: mongoRequired(String),
-    email: mongoRequired(String),
-    thumbnail: mongoRequired(String),
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: { type: String, required: true },
+    thumbnail: { type: String, required: true },
   },
   { _id: false }
 );
@@ -55,11 +55,11 @@ const metadataSchema = new Schema<Account["metadata"]>(
 );
 
 export const accountSchema = new Schema<Account, AccountModelType>({
-  profile: mongoRequired(accountProfileSchema),
-  security: mongoRequired(securitySchema),
-  preferences: mongoRequired(preferencesSchema),
-  flags: mongoRequired(flagsSchema),
-  metadata: mongoRequired(metadataSchema),
+  profile: { type: accountProfileSchema, required: true },
+  security: { type: securitySchema, required: true },
+  preferences: { type: preferencesSchema, required: true },
+  flags: { type: flagsSchema, required: true },
+  metadata: { type: metadataSchema, required: true },
 });
 
 export const AccountModel = model<Account, AccountModelType>(
