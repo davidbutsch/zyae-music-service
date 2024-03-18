@@ -1,9 +1,11 @@
+import { AppError } from "@/errors";
 import {
   Account,
   AccountDTO,
   IAccountRepository,
   IAccountService,
 } from "@/modules/account";
+import { StatusCodes } from "http-status-codes";
 
 import { Types } from "mongoose";
 import { inject, injectable } from "tsyringe";
@@ -14,8 +16,13 @@ export class AccountService implements IAccountService {
     @inject("AccountRepository") private accountRepository: IAccountRepository
   ) {}
 
-  async findById(id: string): Promise<AccountDTO | null> {
-    return this.accountRepository.findById(id);
+  async findById(id: string): Promise<AccountDTO> {
+    const account = await this.accountRepository.findById(id);
+
+    if (!account)
+      throw new AppError(StatusCodes.NOT_FOUND, "Account not found");
+
+    return AccountDTO.toDTO(account);
   }
   create(account: Partial<Account>): Promise<AccountDTO> {
     throw new Error("Method not implemented.");
