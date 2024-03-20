@@ -10,7 +10,7 @@ import { IAccountService, AccountDTO } from "@/modules/account";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "@/errors";
 import { StatusCodes } from "http-status-codes";
-import { AttachSession } from "@/middlewares";
+import { ParseSessionHeader } from "@/middlewares";
 
 @injectable()
 @JsonController("/accounts")
@@ -19,7 +19,7 @@ export class AccountController {
     @inject("AccountService") private accountService: IAccountService
   ) {}
 
-  @UseBefore(AttachSession)
+  @UseBefore(ParseSessionHeader)
   @Get("/me")
   getMe() {
     throw new AppError(StatusCodes.NOT_IMPLEMENTED, "Route not implemented.");
