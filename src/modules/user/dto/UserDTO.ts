@@ -15,8 +15,8 @@ import {
 
 import { Type } from "class-transformer";
 
-export class UserDTO implements Omit<User, "security"> {
-  @IsString() _id: string;
+export class UserDTO implements Omit<User, "_id" | "security"> {
+  @IsString() id: string;
 
   @IsDefined()
   @IsNotEmptyObject()
@@ -45,8 +45,14 @@ export class UserDTO implements Omit<User, "security"> {
   static toDTO(domain: User): UserDTO {
     if (domain instanceof UserModel) domain = domain.toObject();
 
-    const { security, ...DTO } = domain;
+    const userDTO: UserDTO = {
+      id: domain._id.toString(),
+      profile: domain.profile,
+      preferences: domain.preferences,
+      flags: domain.flags,
+      metadata: domain.metadata,
+    };
 
-    return DTO;
+    return userDTO;
   }
 }
