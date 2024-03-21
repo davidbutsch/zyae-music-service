@@ -13,7 +13,8 @@ export class UserRepository implements IUserRepository {
   }
   update(
     id: string | Types.ObjectId | undefined,
-    update: UpdateQuery<User & Document>
+    update: UpdateQuery<User & Document>,
+    options?: QueryOptions<User & Document>
   ): Promise<(User & Document) | null> {
     throw new Error("Method not implemented.");
   }

@@ -1,5 +1,11 @@
 import { AppError } from "@/errors";
-import { User, UserDTO, IUserRepository, IUserService } from "@/modules/user";
+import {
+  User,
+  UserDTO,
+  IUserRepository,
+  IUserService,
+  UpdateUserDTO,
+} from "@/modules/user";
 import { StatusCodes } from "http-status-codes";
 
 import { Types } from "mongoose";
@@ -21,7 +27,7 @@ export class UserService implements IUserService {
   create(user: Partial<User>): Promise<UserDTO> {
     throw new Error("Method not implemented.");
   }
-  updateName(id: string, update: string): Promise<UserDTO> {
+  update(id: string, update: UpdateUserDTO): Promise<UserDTO> {
     throw new Error("Method not implemented.");
   }
   delete(id: string | Types.ObjectId | undefined): Promise<void> {
