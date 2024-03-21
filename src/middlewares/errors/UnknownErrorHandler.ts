@@ -12,15 +12,14 @@ import { serializeError } from "serialize-error-cjs";
 export class UnknownErrorHandler implements ExpressErrorMiddlewareInterface {
   error(error: any, _req: Request, res: Response): void {
     const errorResponse: ErrorResponse = {
-      code: error.statusCode || error.code || error.status,
+      code: 500,
       status: error.name || "InternalError",
       message: error.message || "Unexpected error occured",
     };
 
-    if (typeof errorResponse.code !== "number") errorResponse.code = 500;
     if (env.NODE_ENV === "development")
       errorResponse.errors = [serializeError(error)];
 
-    res.status(errorResponse.code).json({ error: errorResponse });
+    res.status(500).json({ error: errorResponse });
   }
 }
