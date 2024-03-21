@@ -1,10 +1,4 @@
 import {
-  AccountRepository,
-  AccountService,
-  IAccountRepository,
-  IAccountService,
-} from "@/modules/account";
-import {
   ClassConstructor,
   IocAdapter,
   useContainer,
@@ -16,6 +10,12 @@ import {
   SessionRepository,
   SessionService,
 } from "@/modules/session";
+import {
+  IUserRepository,
+  IUserService,
+  UserRepository,
+  UserService,
+} from "@/modules/user";
 
 class TsyringeAdapter implements IocAdapter {
   constructor(private readonly TsyringeContainer: DependencyContainer) {}
@@ -26,11 +26,11 @@ class TsyringeAdapter implements IocAdapter {
   }
 }
 
-container.register<IAccountService>("AccountService", {
-  useClass: AccountService,
+container.register<IUserService>("UserService", {
+  useClass: UserService,
 });
-container.register<IAccountRepository>("AccountRepository", {
-  useClass: AccountRepository,
+container.register<IUserRepository>("UserRepository", {
+  useClass: UserRepository,
 });
 container.register<ISessionService>("SessionService", {
   useClass: SessionService,

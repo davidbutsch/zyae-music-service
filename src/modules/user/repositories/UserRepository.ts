@@ -1,20 +1,20 @@
-import { Account, IAccountRepository } from "@/modules/account";
 import { Document, QueryOptions, Types, UpdateQuery } from "mongoose";
+import { IUserRepository, User } from "@/modules/user";
 
-export class AccountRepository implements IAccountRepository {
+export class UserRepository implements IUserRepository {
   findById(
     id: string | Types.ObjectId | undefined,
     options?: QueryOptions
-  ): Promise<(Account & Document) | null> {
+  ): Promise<(User & Document) | null> {
     throw new Error("Method not implemented.");
   }
-  create(account: Partial<Account>): Promise<Account & Document> {
+  create(user: Partial<User>): Promise<User & Document> {
     throw new Error("Method not implemented.");
   }
   update(
     id: string | Types.ObjectId | undefined,
-    update: UpdateQuery<Account & Document>
-  ): Promise<(Account & Document) | null> {
+    update: UpdateQuery<User & Document>
+  ): Promise<(User & Document) | null> {
     throw new Error("Method not implemented.");
   }
   delete(id: string | Types.ObjectId | undefined): Promise<void> {

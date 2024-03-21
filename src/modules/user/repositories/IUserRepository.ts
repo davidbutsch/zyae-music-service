@@ -1,16 +1,16 @@
 import { Document, QueryOptions, Types, UpdateQuery } from "mongoose";
 
-import { Account } from "@/modules/account";
+import { User } from "@/modules/user";
 
-export interface IAccountRepository {
+export interface IUserRepository {
   findById(
     id: Types.ObjectId | string | undefined,
     options?: QueryOptions
-  ): Promise<(Account & Document) | null>;
-  create(account: Partial<Account>): Promise<Account & Document>;
+  ): Promise<(User & Document) | null>;
+  create(user: Partial<User>): Promise<User & Document>;
   update(
     id: Types.ObjectId | string | undefined,
-    update: UpdateQuery<Account & Document>
-  ): Promise<(Account & Document) | null>;
+    update: UpdateQuery<User & Document>
+  ): Promise<(User & Document) | null>;
   delete(id: Types.ObjectId | string | undefined): Promise<void>;
 }

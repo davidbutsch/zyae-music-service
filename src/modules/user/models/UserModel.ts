@@ -1,11 +1,11 @@
 import { Model, Schema, model } from "mongoose";
 
-import { Account } from "@/modules/account";
+import { User } from "@/modules/user";
 import { validateISO6381 } from "@/common";
 
-type AccountModelType = Model<Account>;
+type UserModelType = Model<User>;
 
-const accountProfileSchema = new Schema<Account["profile"]>(
+const profileSchema = new Schema<User["profile"]>(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -15,14 +15,14 @@ const accountProfileSchema = new Schema<Account["profile"]>(
   { _id: false }
 );
 
-const securitySchema = new Schema<Account["security"]>(
+const securitySchema = new Schema<User["security"]>(
   {
     password: { type: String, default: null },
   },
   { _id: false }
 );
 
-const preferencesSchema = new Schema<Account["preferences"]>(
+const preferencesSchema = new Schema<User["preferences"]>(
   {
     language: {
       type: String,
@@ -36,14 +36,14 @@ const preferencesSchema = new Schema<Account["preferences"]>(
   { _id: false }
 );
 
-const flagsSchema = new Schema<Account["flags"]>(
+const flagsSchema = new Schema<User["flags"]>(
   {
     isEmailVerified: { type: Boolean, required: true, default: false },
   },
   { _id: false }
 );
 
-const metadataSchema = new Schema<Account["metadata"]>(
+const metadataSchema = new Schema<User["metadata"]>(
   {
     createdAt: {
       type: String,
@@ -54,15 +54,12 @@ const metadataSchema = new Schema<Account["metadata"]>(
   { _id: false }
 );
 
-export const accountSchema = new Schema<Account, AccountModelType>({
-  profile: { type: accountProfileSchema, required: true },
+export const userSchema = new Schema<User, UserModelType>({
+  profile: { type: profileSchema, required: true },
   security: { type: securitySchema, required: true },
   preferences: { type: preferencesSchema, required: true },
   flags: { type: flagsSchema, required: true },
   metadata: { type: metadataSchema, required: true },
 });
 
-export const AccountModel = model<Account, AccountModelType>(
-  "Account",
-  accountSchema
-);
+export const UserModel = model<User, UserModelType>("User", userSchema);

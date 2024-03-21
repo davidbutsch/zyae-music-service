@@ -6,18 +6,16 @@ import {
   UseBefore,
 } from "routing-controllers";
 
-import { IAccountService, AccountDTO } from "@/modules/account";
+import { IUserService, UserDTO } from "@/modules/user";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "@/errors";
 import { StatusCodes } from "http-status-codes";
 import { AttachSession } from "@/middlewares";
 
 @injectable()
-@JsonController("/accounts")
-export class AccountController {
-  constructor(
-    @inject("AccountService") private accountService: IAccountService
-  ) {}
+@JsonController("/users")
+export class UserController {
+  constructor(@inject("UserService") private userService: IUserService) {}
 
   @UseBefore(AttachSession)
   @Get("/me")
@@ -26,7 +24,7 @@ export class AccountController {
   }
 
   @Post("/")
-  create(@Body() account: AccountDTO) {
+  create(@Body() user: UserDTO) {
     throw new AppError(StatusCodes.NOT_IMPLEMENTED, "Route not implemented.");
   }
 }

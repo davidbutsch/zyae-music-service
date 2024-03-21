@@ -1,29 +1,28 @@
-import { IsDefined, IsNotEmptyObject, ValidateNested } from "class-validator";
 import {
+  IsDefined,
+  IsNotEmptyObject,
+  IsString,
+  ValidateNested,
+} from "class-validator";
+import {
+  User,
   UserFlags,
   UserMetadata,
+  UserModel,
   UserPreferences,
   UserProfile,
-  UserSecurity,
 } from "@/modules/user";
 
-import { IsObjectId } from "@/common";
 import { Type } from "class-transformer";
 
-export class User {
-  @IsObjectId() _id: string;
+export class UserDTO implements Omit<User, "security"> {
+  @IsString() _id: string;
 
   @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
   @Type(() => UserProfile)
   profile: UserProfile;
-
-  @IsDefined()
-  @IsNotEmptyObject()
-  @ValidateNested()
-  @Type(() => UserSecurity)
-  security: UserSecurity;
 
   @IsDefined()
   @IsNotEmptyObject()
@@ -42,4 +41,12 @@ export class User {
   @ValidateNested()
   @Type(() => UserMetadata)
   metadata: UserMetadata;
+
+  static toDTO(domain: User): UserDTO {
+    if (domain instanceof UserModel) domain = domain.toObject();
+
+    const { security, ...DTO } = domain;
+
+    return DTO;
+  }
 }
