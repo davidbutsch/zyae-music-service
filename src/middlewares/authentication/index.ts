@@ -1,1 +1,1 @@
-export * from "./ParseSessionHeader";
+export * from "./AttachSession";
