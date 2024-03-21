@@ -13,5 +13,8 @@ export interface IUserRepository {
     update: UpdateQuery<User & Document>,
     options?: QueryOptions<User & Document>
   ): Promise<(User & Document) | null>;
-  delete(id: Types.ObjectId | string | undefined): Promise<void>;
+  delete(
+    id: string | Types.ObjectId | undefined,
+    options?: QueryOptions<User & Document>
+  ): Promise<(User & Document) | null>;
 }

@@ -18,7 +18,10 @@ export class UserRepository implements IUserRepository {
   ): Promise<(User & Document) | null> {
     throw new Error("Method not implemented.");
   }
-  delete(id: string | Types.ObjectId | undefined): Promise<void> {
+  delete(
+    id: string | Types.ObjectId | undefined,
+    options?: QueryOptions<User & Document>
+  ): Promise<(User & Document) | null> {
     throw new Error("Method not implemented.");
   }
 }
