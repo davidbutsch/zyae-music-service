@@ -4,7 +4,7 @@ import { IUserRepository, User } from "@/modules/user";
 export class UserRepository implements IUserRepository {
   findById(
     id: string | Types.ObjectId | undefined,
-    options?: QueryOptions
+    options?: QueryOptions<User & Document>
   ): Promise<(User & Document) | null> {
     throw new Error("Method not implemented.");
   }

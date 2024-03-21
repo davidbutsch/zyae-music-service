@@ -5,7 +5,7 @@ import { User } from "@/modules/user";
 export interface IUserRepository {
   findById(
     id: Types.ObjectId | string | undefined,
-    options?: QueryOptions
+    options?: QueryOptions<User & Document>
   ): Promise<(User & Document) | null>;
   create(user: Partial<User>): Promise<User & Document>;
   update(
