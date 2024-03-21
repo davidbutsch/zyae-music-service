@@ -21,7 +21,7 @@ export class UserService implements IUserService {
   create(user: Partial<User>): Promise<UserDTO> {
     throw new Error("Method not implemented.");
   }
-  updateName(id: string, update: string): Promise<UserDTO | null> {
+  updateName(id: string, update: string): Promise<UserDTO> {
     throw new Error("Method not implemented.");
   }
   delete(id: string | Types.ObjectId | undefined): Promise<void> {
