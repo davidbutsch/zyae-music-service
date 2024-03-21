@@ -1,27 +1,27 @@
 import { Document, QueryOptions, Types, UpdateQuery } from "mongoose";
-import { IUserRepository, User } from "@/modules/user";
+import { IUserRepository, User, UserModel } from "@/modules/user";
 
 export class UserRepository implements IUserRepository {
   findById(
     id: string | Types.ObjectId | undefined,
     options?: QueryOptions<User & Document>
   ): Promise<(User & Document) | null> {
-    throw new Error("Method not implemented.");
+    return UserModel.findById(id, null, options);
   }
   create(user: Partial<User>): Promise<User & Document> {
-    throw new Error("Method not implemented.");
+    return UserModel.create(user);
   }
   update(
     id: string | Types.ObjectId | undefined,
     update: UpdateQuery<User & Document>,
     options?: QueryOptions<User & Document>
   ): Promise<(User & Document) | null> {
-    throw new Error("Method not implemented.");
+    return UserModel.findByIdAndUpdate(id, update, options);
   }
   delete(
     id: string | Types.ObjectId | undefined,
     options?: QueryOptions<User & Document>
   ): Promise<(User & Document) | null> {
-    throw new Error("Method not implemented.");
+    return UserModel.findByIdAndDelete(id, options);
   }
 }
