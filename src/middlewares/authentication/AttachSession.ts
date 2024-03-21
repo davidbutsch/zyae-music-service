@@ -1,7 +1,7 @@
 import { ExpressMiddlewareInterface, Middleware } from "routing-controllers";
 import { ISessionRepository, ISessionService } from "@/modules/session";
 import { NextFunction, Request, Response } from "express";
-import { container, inject, injectable } from "tsyringe";
+import { container, injectable } from "tsyringe";
 
 import { AppError } from "@/errors";
 import { StatusCodes } from "http-status-codes";

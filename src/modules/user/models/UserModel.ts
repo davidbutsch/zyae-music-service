@@ -15,13 +15,6 @@ const profileSchema = new Schema<User["profile"]>(
   { _id: false }
 );
 
-const securitySchema = new Schema<User["security"]>(
-  {
-    password: { type: String, default: null },
-  },
-  { _id: false }
-);
-
 const preferencesSchema = new Schema<User["preferences"]>(
   {
     language: {
@@ -32,6 +25,13 @@ const preferencesSchema = new Schema<User["preferences"]>(
         validator: validateISO6381,
       },
     },
+  },
+  { _id: false }
+);
+
+const securitySchema = new Schema<User["security"]>(
+  {
+    password: { type: String, default: null },
   },
   { _id: false }
 );
@@ -56,8 +56,8 @@ const metadataSchema = new Schema<User["metadata"]>(
 
 export const userSchema = new Schema<User, UserModelType>({
   profile: { type: profileSchema, required: true },
-  security: { type: securitySchema, required: true },
   preferences: { type: preferencesSchema, required: true },
+  security: { type: securitySchema, required: true },
   flags: { type: flagsSchema, required: true },
   metadata: { type: metadataSchema, required: true },
 });

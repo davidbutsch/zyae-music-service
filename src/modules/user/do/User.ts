@@ -22,14 +22,14 @@ export class User {
   @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
-  @Type(() => UserSecurity)
-  security: UserSecurity;
+  @Type(() => UserPreferences)
+  preferences: UserPreferences;
 
   @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
-  @Type(() => UserPreferences)
-  preferences: UserPreferences;
+  @Type(() => UserSecurity)
+  security: UserSecurity;
 
   @IsDefined()
   @IsNotEmptyObject()
