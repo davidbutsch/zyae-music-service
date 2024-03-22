@@ -1,6 +1,5 @@
 import { AppError } from "@/errors";
 import {
-  User,
   UserDTO,
   IUserRepository,
   IUserService,
@@ -8,7 +7,6 @@ import {
 } from "@/modules/user";
 import { StatusCodes } from "http-status-codes";
 
-import { Types } from "mongoose";
 import { inject, injectable } from "tsyringe";
 
 @injectable()
@@ -24,13 +22,7 @@ export class UserService implements IUserService {
 
     return UserDTO.toDTO(user);
   }
-  create(user: Partial<User>): Promise<UserDTO> {
-    throw new Error("Method not implemented.");
-  }
   update(id: string, update: UpdateUserDTO): Promise<UserDTO> {
-    throw new Error("Method not implemented.");
-  }
-  delete(id: string | Types.ObjectId | undefined): Promise<void> {
     throw new Error("Method not implemented.");
   }
 }
