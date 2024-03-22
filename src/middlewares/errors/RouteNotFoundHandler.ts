@@ -5,11 +5,9 @@ import { AppError } from "@/errors";
 import { StatusCodes } from "http-status-codes";
 
 @Middleware({ type: "after" })
-export class FinalRequestMiddleware implements ExpressMiddlewareInterface {
+export class RouteNotFoundHandler implements ExpressMiddlewareInterface {
   public use(_req: Request, res: Response, next: NextFunction): void {
-    if (!res.headersSent) {
-      next(new AppError(StatusCodes.NOT_FOUND, "Route not found"));
-    }
-    res.end();
+    if (res.headersSent) res.end();
+    else next(new AppError(StatusCodes.NOT_FOUND, "Route not found"));
   }
 }

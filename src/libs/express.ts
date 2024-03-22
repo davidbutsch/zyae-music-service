@@ -1,8 +1,8 @@
 import {
   AppErrorHandler,
   ErrorLogger,
-  FinalRequestMiddleware,
   RequestLogger,
+  RouteNotFoundHandler,
   SyntaxErrorHandler,
   UnknownErrorHandler,
   ValidationErrorHandler,
@@ -58,7 +58,7 @@ useExpressServer(app, {
   },
   middlewares: [
     RequestLogger,
-    FinalRequestMiddleware,
+    RouteNotFoundHandler,
     ErrorLogger,
     AppErrorHandler,
     SyntaxErrorHandler,
