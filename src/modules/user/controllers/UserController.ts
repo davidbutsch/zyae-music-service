@@ -27,7 +27,9 @@ export class UserController {
 
     const user = await this.userService.findById(session.userId);
 
-    return user;
+    return {
+      data: { user },
+    };
   }
 
   @UseBefore(AttachSession)
