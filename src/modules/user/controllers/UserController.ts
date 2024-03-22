@@ -28,9 +28,4 @@ export class UserController {
 
     return user;
   }
-
-  @Post("/")
-  create(@Body() user: UserDTO) {
-    throw new AppError(StatusCodes.NOT_IMPLEMENTED, "Route not implemented.");
-  }
 }
