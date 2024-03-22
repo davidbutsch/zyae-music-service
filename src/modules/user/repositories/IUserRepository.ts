@@ -7,6 +7,10 @@ export interface IUserRepository {
     id: Types.ObjectId | string | undefined,
     options?: QueryOptions<User & Document>
   ): Promise<(User & Document) | null>;
+  findByFilter(
+    filter: Partial<User>,
+    options?: QueryOptions<User & Document>
+  ): Promise<(User & Document) | null>;
   create(user: Partial<User>): Promise<User & Document>;
   update(
     id: Types.ObjectId | string | undefined,
