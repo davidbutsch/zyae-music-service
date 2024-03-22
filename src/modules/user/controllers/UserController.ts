@@ -2,11 +2,12 @@ import {
   Body,
   Get,
   JsonController,
+  Patch,
   Post,
   Res,
   UseBefore,
 } from "routing-controllers";
-import { IUserService, UserDTO } from "@/modules/user";
+import { IUserService, UpdateUserDTO, UserDTO } from "@/modules/user";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "@/errors";
 import { StatusCodes } from "http-status-codes";
@@ -27,5 +28,17 @@ export class UserController {
     const user = await this.userService.findById(session.userId);
 
     return user;
+  }
+
+  @UseBefore(AttachSession)
+  @Patch("/me")
+  async updateMe(@Res() res: Response, @Body() update: UpdateUserDTO) {
+    const session = res.locals.session;
+
+    const user = await this.userService.update(session.userId, update);
+
+    return {
+      data: { user },
+    };
   }
 }
