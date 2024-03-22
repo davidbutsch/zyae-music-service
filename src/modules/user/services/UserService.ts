@@ -1,3 +1,4 @@
+import { objectToDotNotation } from "@/common";
 import { AppError } from "@/errors";
 import {
   UserDTO,
@@ -22,7 +23,18 @@ export class UserService implements IUserService {
 
     return UserDTO.toDTO(user);
   }
-  update(id: string, update: UpdateUserDTO): Promise<UserDTO> {
-    throw new Error("Method not implemented.");
+  async update(id: string, update: UpdateUserDTO): Promise<UserDTO> {
+    const updatedUserDoc = await this.userRepository.update(
+      id,
+      { $set: objectToDotNotation(update) },
+      {
+        new: true,
+      }
+    );
+
+    if (!updatedUserDoc)
+      throw new AppError(StatusCodes.NOT_FOUND, "User not found");
+
+    return UserDTO.toDTO(updatedUserDoc);
   }
 }
