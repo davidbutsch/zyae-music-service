@@ -52,6 +52,10 @@ useExpressServer(app, {
   controllers: [UserController],
   routePrefix: BASE_PATH,
   defaultErrorHandler: false,
+  validation: {
+    whitelist: true,
+    forbidNonWhitelisted: true,
+  },
   middlewares: [
     RequestLogger,
     FinalRequestMiddleware,
