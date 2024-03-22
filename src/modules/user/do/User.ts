@@ -1,4 +1,9 @@
-import { IsDefined, IsNotEmptyObject, ValidateNested } from "class-validator";
+import {
+  IsDefined,
+  IsMongoId,
+  IsNotEmptyObject,
+  ValidateNested,
+} from "class-validator";
 import {
   UserFlags,
   UserMetadata,
@@ -7,11 +12,10 @@ import {
   UserSecurity,
 } from "@/modules/user";
 
-import { IsObjectId } from "@/common";
 import { Type } from "class-transformer";
 
 export class User {
-  @IsObjectId() _id: string;
+  @IsMongoId() _id: string;
 
   @IsDefined()
   @IsNotEmptyObject()

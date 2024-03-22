@@ -1,10 +1,8 @@
-import { IsDateString, IsString } from "class-validator";
-
-import { IsObjectId } from "@/common";
+import { IsDateString, IsMongoId, IsString } from "class-validator";
 
 export class Session {
-  @IsObjectId() id: string;
-  @IsObjectId() userId: string;
+  @IsMongoId() id: string;
+  @IsMongoId() userId: string;
   @IsString() accessToken: string;
   @IsString() refreshToken: string;
   @IsDateString() expiresAt: string;
