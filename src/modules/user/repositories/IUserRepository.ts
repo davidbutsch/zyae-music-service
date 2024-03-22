@@ -3,10 +3,6 @@ import { Document, QueryOptions, Types, UpdateQuery } from "mongoose";
 import { User } from "@/modules/user";
 
 export interface IUserRepository {
-  findById(
-    id: Types.ObjectId | string | undefined,
-    options?: QueryOptions<User & Document>
-  ): Promise<(User & Document) | null>;
   findByFilter(
     filter: Partial<User>,
     options?: QueryOptions<User & Document>

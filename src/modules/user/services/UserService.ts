@@ -18,7 +18,7 @@ export class UserService implements IUserService {
   ) {}
 
   async findById(id: string): Promise<UserDTO> {
-    const user = await this.userRepository.findById(id);
+    const user = await this.userRepository.findByFilter({ _id: id });
 
     if (!user) throw new AppError(StatusCodes.NOT_FOUND, "User not found");
 
