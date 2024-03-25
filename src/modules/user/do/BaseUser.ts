@@ -1,22 +1,39 @@
 import {
-  BaseUserFlags,
-  BaseUserMetadata,
-  BaseUserPreferences,
-  BaseUserProfile,
-  User,
-  UserModel,
-} from "@/modules/user";
-import {
+  IsBoolean,
+  IsDateString,
   IsDefined,
+  IsEmail,
+  IsMongoId,
   IsNotEmptyObject,
   IsString,
+  IsUrl,
   ValidateNested,
 } from "class-validator";
 
+import { IsISO6391 } from "@/common";
 import { Type } from "class-transformer";
 
-export class UserDTO implements Omit<User, "_id"> {
-  @IsString() id: string;
+export class BaseUserProfile {
+  @IsString() firstName: string;
+  @IsString() lastName: string;
+  @IsEmail() email: string;
+  @IsUrl() thumbnail: string;
+}
+
+export class BaseUserPreferences {
+  @IsISO6391() language: string;
+}
+
+export class BaseUserFlags {
+  @IsBoolean() isEmailVerified: boolean;
+}
+
+export class BaseUserMetadata {
+  @IsDateString() createdAt: string;
+}
+
+export class BaseUser {
+  @IsMongoId() _id: string;
 
   @IsDefined()
   @IsNotEmptyObject()
@@ -41,18 +58,4 @@ export class UserDTO implements Omit<User, "_id"> {
   @ValidateNested()
   @Type(() => BaseUserMetadata)
   metadata: BaseUserMetadata;
-
-  static toDTO(domain: User): UserDTO {
-    if (domain instanceof UserModel) domain = domain.toObject();
-
-    const userDTO: UserDTO = {
-      id: domain._id.toString(),
-      profile: domain.profile,
-      preferences: domain.preferences,
-      flags: domain.flags,
-      metadata: domain.metadata,
-    };
-
-    return userDTO;
-  }
 }

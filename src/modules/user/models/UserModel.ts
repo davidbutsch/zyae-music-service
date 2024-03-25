@@ -29,13 +29,6 @@ const preferencesSchema = new Schema<User["preferences"]>(
   { _id: false }
 );
 
-const securitySchema = new Schema<User["security"]>(
-  {
-    password: { type: String, default: null },
-  },
-  { _id: false }
-);
-
 const flagsSchema = new Schema<User["flags"]>(
   {
     isEmailVerified: { type: Boolean, required: true, default: false },
@@ -57,7 +50,6 @@ const metadataSchema = new Schema<User["metadata"]>(
 export const userSchema = new Schema<User, UserModelType>({
   profile: { type: profileSchema, required: true },
   preferences: { type: preferencesSchema, required: true },
-  security: { type: securitySchema, required: true },
   flags: { type: flagsSchema, required: true },
   metadata: { type: metadataSchema, required: true },
 });
