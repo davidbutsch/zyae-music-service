@@ -7,7 +7,7 @@ import {
   UnknownErrorHandler,
   ValidationErrorHandler,
 } from "@/middlewares";
-import { BASE_PATH, config } from "@/common";
+import { BASE_PATH, config, defaultValidationConfig } from "@/common";
 import express, { Express } from "express";
 
 import { AppError } from "@/errors";
@@ -52,10 +52,7 @@ useExpressServer(app, {
   controllers: [UserController],
   routePrefix: BASE_PATH,
   defaultErrorHandler: false,
-  validation: {
-    whitelist: true,
-    forbidNonWhitelisted: true,
-  },
+  validation: defaultValidationConfig,
   middlewares: [
     RequestLogger,
     RouteNotFoundHandler,
