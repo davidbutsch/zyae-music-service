@@ -3,14 +3,11 @@ import {
   Get,
   JsonController,
   Patch,
-  Post,
   Res,
   UseBefore,
 } from "routing-controllers";
-import { IUserService, UpdateUserDTO, UserDTO } from "@/modules/user";
+import { IUserService, UpdateUserDTO } from "@/modules/user";
 import { inject, injectable } from "tsyringe";
-import { AppError } from "@/errors";
-import { StatusCodes } from "http-status-codes";
 import { AttachSession } from "@/middlewares";
 
 import { Response } from "express";
