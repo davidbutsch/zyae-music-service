@@ -1,13 +1,14 @@
 import { Document, QueryOptions, Types, UpdateQuery } from "mongoose";
 
+import { DeepPartial } from "@/types";
 import { User } from "@/modules/user";
 
 export interface IUserRepository {
   findByFilter(
-    filter: Partial<User>,
+    filter: DeepPartial<User>,
     options?: QueryOptions<User & Document>
   ): Promise<(User & Document) | null>;
-  create(user: Partial<User>): Promise<User & Document>;
+  create(user: DeepPartial<User>): Promise<User & Document>;
   update(
     id: Types.ObjectId | string | undefined,
     update: UpdateQuery<User & Document>,
