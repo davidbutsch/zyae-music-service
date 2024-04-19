@@ -13,6 +13,7 @@ import {
 import {
   IUserRepository,
   IUserService,
+  UserQueue,
   UserRepository,
   UserService,
 } from "@/modules/user";
@@ -37,6 +38,10 @@ container.register<ISessionService>("SessionService", {
 });
 container.register<ISessionRepository>("SessionRepository", {
   useClass: SessionRepository,
+});
+
+container.register("UserQueue", {
+  useClass: UserQueue,
 });
 
 useContainer(new TsyringeAdapter(container));

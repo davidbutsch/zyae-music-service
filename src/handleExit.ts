@@ -1,6 +1,5 @@
-import { Logger, httpServer, redis } from "@/libs";
+import { Logger, closeWorkers, httpServer, redis } from "@/libs";
 
-import { closeWorkers } from "@/queue";
 import mongoose from "mongoose";
 import promisify from "util.promisify";
 
