@@ -18,25 +18,21 @@ import { Type } from "class-transformer";
 export class UserDTO implements Omit<User, "_id"> {
   @IsString() id: string;
 
-  @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
   @Type(() => BaseUserProfile)
   profile: BaseUserProfile;
 
-  @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
   @Type(() => BaseUserPreferences)
   preferences: BaseUserPreferences;
 
-  @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
   @Type(() => BaseUserFlags)
   flags: BaseUserFlags;
 
-  @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
   @Type(() => BaseUserMetadata)

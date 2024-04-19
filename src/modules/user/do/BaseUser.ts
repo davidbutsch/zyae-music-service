@@ -35,25 +35,21 @@ export class BaseUserMetadata {
 export class BaseUser {
   @IsMongoId() _id: string;
 
-  @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
   @Type(() => BaseUserProfile)
   profile: BaseUserProfile;
 
-  @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
   @Type(() => BaseUserPreferences)
   preferences: BaseUserPreferences;
 
-  @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
   @Type(() => BaseUserFlags)
   flags: BaseUserFlags;
 
-  @IsDefined()
   @IsNotEmptyObject()
   @ValidateNested()
   @Type(() => BaseUserMetadata)
