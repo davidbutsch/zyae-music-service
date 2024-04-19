@@ -57,6 +57,8 @@ export class UserWorker extends Worker {
 
     if (errors.length > 0) throw new Error(errors.toString());
 
-    this.userRepository?.update(update._id, update);
+    const updatedUser = this.userRepository?.update(update._id, update);
+
+    if (!updatedUser) throw new Error("User not found");
   }
 }
