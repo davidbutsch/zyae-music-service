@@ -3,6 +3,14 @@ import {
   IocAdapter,
   useContainer,
 } from "routing-controllers";
+import {
+  CreateUserQueue,
+  IUserRepository,
+  IUserService,
+  UpdateUserQueue,
+  UserRepository,
+  UserService,
+} from "@/modules/user";
 import { DependencyContainer, container } from "tsyringe";
 import {
   ISessionRepository,
@@ -10,13 +18,6 @@ import {
   SessionRepository,
   SessionService,
 } from "@/modules/session";
-import {
-  IUserRepository,
-  IUserService,
-  UserQueue,
-  UserRepository,
-  UserService,
-} from "@/modules/user";
 
 class TsyringeAdapter implements IocAdapter {
   constructor(private readonly TsyringeContainer: DependencyContainer) {}
@@ -40,8 +41,11 @@ container.register<ISessionRepository>("SessionRepository", {
   useClass: SessionRepository,
 });
 
-container.register("UserQueue", {
-  useClass: UserQueue,
+container.register("CreateUserQueue", {
+  useClass: CreateUserQueue,
+});
+container.register("UpdateUserQueue", {
+  useClass: UpdateUserQueue,
 });
 
 useContainer(new TsyringeAdapter(container));

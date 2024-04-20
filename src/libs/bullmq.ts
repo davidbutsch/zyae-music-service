@@ -1,8 +1,9 @@
+import { CreateUserWorker, UpdateUserWorker } from "@/modules/user";
+
 import { Logger } from "./winston";
-import { UserWorker } from "@/modules/user";
 import { Worker } from "bullmq";
 
-const workers: Worker[] = [new UserWorker()];
+const workers: Worker[] = [new CreateUserWorker(), new UpdateUserWorker()];
 
 export const initializeWorkers = () =>
   workers.forEach((worker) => {
