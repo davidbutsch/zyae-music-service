@@ -1,10 +1,9 @@
 import { BaseUser, IUserRepository } from "@/modules/user";
+import { BaseWorker, JobPayload, QueueName } from "@/common";
 import { container, injectable } from "tsyringe";
 
-import { QueueName } from "@/common";
-import { Worker } from "bullmq";
+import { Job } from "bullmq";
 import { plainToClass } from "class-transformer";
-import { redis } from "@/libs";
 import { validate } from "class-validator";
 
 /**
@@ -13,26 +12,20 @@ import { validate } from "class-validator";
  * Implementation: auth/user service emits user events which other services (this one) consume
  */
 @injectable()
-export class UserWorker extends Worker {
+export class UserWorker extends BaseWorker {
   private userRepository: IUserRepository;
 
   constructor() {
-    super(
-      QueueName.USER,
-      async (job) => {
-        switch (job.name) {
-          case "create":
-            return await this.create(job.data);
-          case "update":
-            return await this.update(job.data);
-          default:
-            throw new Error(`"${job.name}" is not a registered method`);
-        }
-      },
-      {
-        connection: redis,
+    super(QueueName.USER, async (job: Job<JobPayload>) => {
+      switch (job.name) {
+        case "create":
+          return await this.create(job.data);
+        case "update":
+          return await this.update(job.data);
+        default:
+          throw new Error(`"${job.name}" is not a registered method`);
       }
-    );
+    });
 
     this.userRepository = container.resolve("UserRepository");
   }
@@ -42,7 +35,9 @@ export class UserWorker extends Worker {
    *
    * @param data new user data will be stripped of all properties not included in BaseUser class
    */
-  private async create(data: unknown): Promise<void> {
+  private async create(payload: JobPayload): Promise<void> {
+    const { data } = payload;
+
     const user = plainToClass(BaseUser, data);
     const errors = await validate(user, { whitelist: true });
 
@@ -51,7 +46,9 @@ export class UserWorker extends Worker {
     await this.userRepository?.create(user);
   }
 
-  private async update(data: unknown): Promise<void> {
+  private async update(payload: JobPayload): Promise<void> {
+    const { data } = payload;
+
     const update: Partial<BaseUser> = plainToClass(BaseUser, data);
     const errors = await validate(update, {
       whitelist: true,

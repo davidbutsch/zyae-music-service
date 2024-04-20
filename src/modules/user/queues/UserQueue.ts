@@ -1,23 +1,36 @@
+import { JobOptions, JobPayload, QueueName, config } from "@/common";
+
 import { BaseUser } from "@/modules/user";
 import { DeepPartial } from "@/types";
 import { Queue } from "bullmq";
-import { QueueName } from "@/common";
 import { redis } from "@/libs";
 
 export class UserQueue {
   private queue: Queue;
 
   constructor() {
-    this.queue = new Queue(QueueName.USER, { connection: redis });
+    this.queue = new Queue(QueueName.USER, {
+      connection: redis,
+    });
   }
 
-  async create(user: BaseUser) {
-    const job = await this.queue.add("create", user);
-    return job;
+  create(user: BaseUser, options?: JobOptions) {
+    const payload: JobPayload = {
+      data: user,
+      owner: config.serviceTag,
+      options,
+    };
+
+    return this.queue.add("create", payload);
   }
 
-  async update(update: DeepPartial<BaseUser>) {
-    const job = await this.queue.add("update", update);
-    return job;
+  update(update: DeepPartial<BaseUser>, options?: JobOptions) {
+    const payload: JobPayload = {
+      data: update,
+      owner: config.serviceTag,
+      options,
+    };
+
+    return this.queue.add("update", payload);
   }
 }
