@@ -1,10 +1,11 @@
-import { QueueName } from "@/common";
 import { BaseUser, IUserRepository } from "@/modules/user";
+import { container, injectable } from "tsyringe";
+
+import { QueueName } from "@/common";
 import { Worker } from "bullmq";
-import { inject, injectable } from "tsyringe";
 import { plainToClass } from "class-transformer";
-import { validate } from "class-validator";
 import { redis } from "@/libs";
+import { validate } from "class-validator";
 
 /**
  * User worker subscribes to the user queue and reflects state change to the service db
@@ -13,9 +14,9 @@ import { redis } from "@/libs";
  */
 @injectable()
 export class UserWorker extends Worker {
-  constructor(
-    @inject("UserRepository") private userRepository?: IUserRepository
-  ) {
+  private userRepository: IUserRepository;
+
+  constructor() {
     super(
       QueueName.USER,
       async (job) => {
@@ -32,6 +33,8 @@ export class UserWorker extends Worker {
         connection: redis,
       }
     );
+
+    this.userRepository = container.resolve("UserRepository");
   }
 
   /**
@@ -42,10 +45,10 @@ export class UserWorker extends Worker {
   private async create(data: unknown): Promise<void> {
     const user = plainToClass(BaseUser, data);
     const errors = await validate(user, { whitelist: true });
+
     if (errors.length > 0) throw new Error(errors.toString());
 
-    console.log("create user!!");
-    console.log(user);
+    await this.userRepository?.create(user);
   }
 
   private async update(data: unknown): Promise<void> {
