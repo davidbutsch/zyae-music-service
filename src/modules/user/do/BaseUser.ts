@@ -4,6 +4,7 @@ import {
   IsEmail,
   IsMongoId,
   IsNotEmptyObject,
+  IsOptional,
   IsString,
   IsUrl,
   ValidateNested,
@@ -14,7 +15,7 @@ import { Type } from "class-transformer";
 
 export class BaseUserProfile {
   @IsString() firstName: string;
-  @IsString() lastName: string;
+  @IsOptional() @IsString() lastName?: string;
   @IsEmail() email: string;
   @IsUrl() thumbnail: string;
 }
