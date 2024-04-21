@@ -5,6 +5,7 @@ import {
 } from "routing-controllers";
 import {
   CreateUserQueue,
+  DeleteUserQueue,
   IUserRepository,
   IUserService,
   UpdateUserQueue,
@@ -46,6 +47,9 @@ container.register("CreateUserQueue", {
 });
 container.register("UpdateUserQueue", {
   useClass: UpdateUserQueue,
+});
+container.register("DeleteUserQueue", {
+  useClass: DeleteUserQueue,
 });
 
 useContainer(new TsyringeAdapter(container));
