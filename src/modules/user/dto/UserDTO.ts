@@ -6,12 +6,7 @@ import {
   User,
   UserModel,
 } from "@/modules/user";
-import {
-  IsDefined,
-  IsNotEmptyObject,
-  IsString,
-  ValidateNested,
-} from "class-validator";
+import { IsNotEmptyObject, IsString, ValidateNested } from "class-validator";
 
 import { Type } from "class-transformer";
 

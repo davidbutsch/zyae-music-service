@@ -1,7 +1,6 @@
 import {
   IsBoolean,
   IsDateString,
-  IsDefined,
   IsEmail,
   IsMongoId,
   IsNotEmptyObject,

@@ -5,6 +5,7 @@ import { ISessionRepository, ISessionService } from "@/modules/session";
 @injectable()
 export class SessionService implements ISessionService {
   constructor(
+    // @ts-ignore ignore noUnusedLocals for unused sessionRepository injection
     @inject("SessionRepository") private sessionRepository: ISessionRepository
   ) {}
 
