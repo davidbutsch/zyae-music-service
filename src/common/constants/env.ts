@@ -1,4 +1,4 @@
-import { defaults } from "./defaults";
+import { defaultEnvOptions } from "./defaults";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -30,7 +30,7 @@ export class ENV {
 
   private loadENV = () => {
     this.keys.forEach((key) => {
-      this[key] = process.env[key] || defaults[key];
+      this[key] = process.env[key] || defaultEnvOptions[key];
 
       if (this[key] === undefined) {
         throw new Error(
