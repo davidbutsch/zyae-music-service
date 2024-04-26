@@ -1,1 +1,2 @@
-export * from "./BaseWorker";
+export * from "./Consumer";
+export * from "./Producer";

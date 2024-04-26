@@ -1,13 +1,17 @@
 import { Logger } from "@/libs";
 import Redis from "ioredis";
+import { UserConsumer } from "@/modules/user";
 import { config } from "@/common";
 
 export const redis = new Redis(config.databases.redis.url, {
   lazyConnect: true,
+  maxLoadingRetryTime: 1,
   maxRetriesPerRequest: null,
 });
 
-(async () => {
+const consumers = [new UserConsumer()];
+
+const initializeConnection = async () => {
   try {
     await redis.connect();
 
@@ -20,4 +24,18 @@ export const redis = new Redis(config.databases.redis.url, {
       `Error connecting to redis on address: '${redis.options.host}:${redis.options.port}'`
     );
   }
+};
+
+export const initializeConsumers = () =>
+  consumers.forEach(async (consumer) => {
+    await consumer.groupRegistrator();
+    consumer.start();
+  });
+
+export const stopConsumers = () =>
+  consumers.forEach((consumers) => consumers.stop());
+
+(async () => {
+  await initializeConnection();
+  initializeConsumers();
 })();

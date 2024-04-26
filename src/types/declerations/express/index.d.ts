@@ -1,9 +1,7 @@
-import { Session } from "@/modules/session";
+import { RedisKey, RedisValue, Result, ClientContext } from "ioredis";
 
-declare global {
-  namespace Express {
-    interface Locals {
-      session: Session;
-    }
-  }
+interface RedisCommander {
+  xadd(
+    ...args: [key: RedisKey, ...args: number, callback: Callback<string | null>]
+  ): Result<string | null, ClientContext>;
 }

@@ -1,5 +1,7 @@
+import { ConsumerOptions, MessageOptions } from "@/common";
+
 import { ENV } from "./env";
-import { JobOptions } from "@/common";
+import { StreamKeys } from ".";
 
 export const defaultEnvOptions: Partial<Record<keyof ENV, string>> = {
   NODE_ENV: "production",
@@ -11,6 +13,13 @@ export const defaultValidationConfig = {
   forbidNonWhitelisted: true,
 };
 
-export const defaultJobOptions: JobOptions = {
+export const defaultConsumerOptions: ConsumerOptions = {
+  streamKey: StreamKeys.DEFAULT,
+  ms: 5000,
+  adaptiveInterval: true,
+  stopOnProcessError: false,
+};
+
+export const defaultProducerAppendOptions: MessageOptions = {
   emitToSelf: false,
 };

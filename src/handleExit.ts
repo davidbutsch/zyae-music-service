@@ -1,4 +1,4 @@
-import { Logger, closeWorkers, httpServer, redis } from "@/libs";
+import { Logger, httpServer, redis, stopConsumers } from "@/libs";
 
 import mongoose from "mongoose";
 import promisify from "util.promisify";
@@ -7,8 +7,7 @@ const gracefulShutdown = async () => {
   try {
     Logger.info("Shutting down gracefully");
 
-    await closeWorkers();
-    Logger.info("Workers closed");
+    stopConsumers();
 
     await promisify(httpServer.close).bind(httpServer)();
     Logger.info("HTTP server closed");

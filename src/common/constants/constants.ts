@@ -1,7 +1,6 @@
 export const BASE_PATH = "/v1";
 
-export const enum QueueName {
-  CREATE_USER = "CREATE_USER_QUEUE",
-  UPDATE_USER = "UPDATE_USER_QUEUE",
-  DELETE_USER = "UPDATE_USER_QUEUE",
+export const enum StreamKeys {
+  DEFAULT = "DEFAULT_STREAM",
+  USER = "USER_STREAM",
 }
