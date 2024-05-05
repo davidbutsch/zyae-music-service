@@ -14,7 +14,6 @@ import {
   IUserRepository,
   IUserService,
   UserConsumer,
-  UserProducer,
   UserRepository,
   UserService,
 } from "@/modules/user";
@@ -41,9 +40,6 @@ container.register<ISessionRepository>("SessionRepository", {
   useClass: SessionRepository,
 });
 
-container.register("UserProducer", {
-  useClass: UserProducer,
-});
 container.register("UserConsumer", {
   useClass: UserConsumer,
 });

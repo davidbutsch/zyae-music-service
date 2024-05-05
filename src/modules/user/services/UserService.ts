@@ -5,7 +5,6 @@ import {
   IUserRepository,
   IUserService,
   UpdateUserDTO,
-  UserProducer,
 } from "@/modules/user";
 import { StatusCodes } from "http-status-codes";
 
@@ -14,8 +13,7 @@ import { inject, injectable } from "tsyringe";
 @injectable()
 export class UserService implements IUserService {
   constructor(
-    @inject("UserRepository") private userRepository: IUserRepository,
-    @inject("UserProducer") private userProducer: UserProducer
+    @inject("UserRepository") private userRepository: IUserRepository
   ) {}
 
   async findById(id: string): Promise<UserDTO> {
@@ -36,8 +34,6 @@ export class UserService implements IUserService {
 
     if (!updatedUserDoc)
       throw new AppError(StatusCodes.NOT_FOUND, "User not found");
-
-    this.userProducer.update(updatedUserDoc.toObject(), { emitToSelf: true });
 
     return UserDTO.toDTO(updatedUserDoc);
   }

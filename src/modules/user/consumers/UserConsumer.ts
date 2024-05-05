@@ -16,6 +16,7 @@ export class UserConsumer extends Consumer {
   constructor() {
     super(
       async (error, message) => {
+        console.log(message);
         if (error) return this.stop(error);
 
         if (message?.payload.method == "create") await this.create(message);
