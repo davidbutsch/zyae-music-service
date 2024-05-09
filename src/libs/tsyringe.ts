@@ -3,13 +3,14 @@ import {
   IocAdapter,
   useContainer,
 } from "routing-controllers";
-import { DependencyContainer, container } from "tsyringe";
+import { DependencyContainer, Lifecycle, container } from "tsyringe";
 import {
   ISessionRepository,
   ISessionService,
   SessionRepository,
   SessionService,
 } from "@/modules/session";
+import { ITrackService, TrackService } from "@/modules/track";
 import {
   IUserRepository,
   IUserService,
@@ -17,6 +18,7 @@ import {
   UserRepository,
   UserService,
 } from "@/modules/user";
+import { YTMusicRepository, YTMusicService } from "@/modules/ytmusic";
 
 class TsyringeAdapter implements IocAdapter {
   constructor(private readonly TsyringeContainer: DependencyContainer) {}
@@ -27,12 +29,18 @@ class TsyringeAdapter implements IocAdapter {
   }
 }
 
+// auth
+
 container.register<IUserService>("UserService", {
   useClass: UserService,
 });
 container.register<IUserRepository>("UserRepository", {
   useClass: UserRepository,
 });
+container.register("UserConsumer", {
+  useClass: UserConsumer,
+});
+
 container.register<ISessionService>("SessionService", {
   useClass: SessionService,
 });
@@ -40,8 +48,23 @@ container.register<ISessionRepository>("SessionRepository", {
   useClass: SessionRepository,
 });
 
-container.register("UserConsumer", {
-  useClass: UserConsumer,
+// tracks
+
+container.register<ITrackService>("TrackService", {
+  useClass: TrackService,
 });
+
+// ytmusic
+
+container.register("YTMusicService", {
+  useClass: YTMusicService,
+});
+container.register(
+  "YTMusicRepository",
+  {
+    useClass: YTMusicRepository,
+  },
+  { lifecycle: Lifecycle.Singleton }
+);
 
 useContainer(new TsyringeAdapter(container));

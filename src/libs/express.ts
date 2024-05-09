@@ -12,6 +12,7 @@ import express, { Express } from "express";
 
 import { AppError } from "@/errors";
 import { StatusCodes } from "http-status-codes";
+import { TrackController } from "@/modules/track";
 import { UserController } from "@/modules/user";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -49,7 +50,7 @@ securityMiddleware(app);
 standardMiddleware(app);
 
 useExpressServer(app, {
-  controllers: [UserController],
+  controllers: [UserController, TrackController],
   routePrefix: BASE_PATH,
   defaultErrorHandler: false,
   validation: defaultValidationConfig,
